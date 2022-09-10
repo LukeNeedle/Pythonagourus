@@ -15,8 +15,8 @@ while rept == "yes":
                 if HpnL == "yes":
                     OL=str(input("Do you know the other length? ")).lower()
                     if OL == "yes":
-                        Hpn=int(input("What is the Hypotenuse? "))
-                        SL=int(input("What is the other length? "))
+                        Hpn=float(input("What is the Hypotenuse? "))
+                        SL=float(input("What is the other length? "))
                         Hpntwo = Hpn * Hpn
                         SLtwo = SL * SL
                         Take = Hpntwo - SLtwo
@@ -26,8 +26,8 @@ while rept == "yes":
                     elif OL == "no":
                         HpnLrept = "true"
                 elif HpnL == "no":
-                    OLOne=int(input("Please enter one of the other lengths: "))
-                    OLTwo=int(input("Please enter the other length: "))
+                    OLOne=float(input("Please enter one of the other lengths: "))
+                    OLTwo=float(input("Please enter the other length: "))
                     OLOneTwo = OLOne * OLOne
                     OLTwoTwo = OLTwo * OLTwo
                     Add = OLOneTwo + OLTwoTwo
