@@ -24,13 +24,45 @@ def intorfloat_validation(validation_number):
         return "yes"
     else:
         return "no"
+def validation(type,question):
+    if type == "str":
+        while True:
+            variable = (input(question))
+            check = str_validation(variable)
+            if check == "yes":
+                variable = str(variable).lower()
+                return variable
+                break
+            else:
+                continue
+    elif type == "int":
+        while True:
+            variable = (input(question))
+            check = intorfloat_validation(variable)
+            if check == "yes":
+                variable = int(variable)
+                return variable
+                break
+            else:
+                continue
+    elif type == "float":
+        while True:
+            variable = (input(question))
+            check = intorfloat_validation(variable)
+            if check == "yes":
+                variable = float(variable)
+                return variable
+                break
+            else:
+                continue
 
 #Title Screen
 print("Welcome to Pythonagorus")#title
 print("Press enter to continue")
 input()#makes the user click enter to continue
 #Title Menu
-print("""    =============================
+print("""
+    =============================
     ||       Modes:            ||
     || 1: Pythagourus          ||
     || 2: Debug                ||
@@ -40,41 +72,37 @@ mode = int(input("What mode do you want to load?(Use numbers) "))#asks the user 
 #Main Code
 if mode == 1:#runs the Pythonagourus code
     while repeat == "yes": #Repeats
-        while True:
-            rightangletriangle = input("Does your triangle have a right angle? ")
-            check = str_validation(rightangletriangle)
-            if check == "yes":
-                rightangletriangle=str(rightangletriangle).lower()
-                break
-            else:
-                continue
-        twosides=str(input("Do you know 2 of the sides? ")).lower()
+        rightangletriangle = validation("str","Does your triangle have a right angle? ")
+        twosides = validation("str","Do you know 2 of the sides? ")
         if rightangletriangle == "yes" and twosides == "yes":
-            Hypotenuse = str(input("Do you know the Hypotenuse?(Side opposite the right angle) ")).lower()
-            otherlength = str(input("Do you know the other length? ")).lower()
+            Hypotenuse = validation("str","Do you know the Hypotenuse?(Side opposite the right angle) ")
+            otherlength = validation("str","Do you know the other length? ")
             if Hypotenuse == "yes" and otherlength == "yes":
-                Hypotenuse = float(input("What is the Hypotenuse? "))
-                otherlength=float(input("What is the other length? "))
+                Hypotenuse = validation("float", "What is the Hypotenuse? ")
+                otherlength = validation("float", "What is the other length? ")
                 answer = math.sqrt((pow(Hypotenuse, 2)-pow(otherlength,2)))
             elif Hypotenuse == "no" and otherlength == "yes":
-                otherlengthone = float(input("Please enter one of the other lengths: "))
-                otherlengthtwo = float(input("Please enter the other length: "))
+                otherlengthone = validation("float", "Please enter one of the other lengths: ")
+                otherlengthtwo = validation("float","Please enter the other length: ")
                 answer = math.sqrt((pow(otherlengthone, 2)+pow(otherlengthtwo,2)))
             else:
-                answer = "error"
-            if answer.isdigit():
+                answer = "Sorry I can't help you"
+            if answer == "Sorry I can't help you":
+                print(answer)
+            else:
                 print("The missing side is", answer)
-                roundamount = int(input("How many decimal places do you want to round the answer to? "))
-                print(round_answer(roundamount,answer))
+                roundamount = validation("int", "How many decimal places do you want to round the answer to? ")
+                print(round_answer(roundamount,answer))#rounds the answer
         elif rightangletriangle == "no" or twosides == "no":
             print("Sorry I can't help you")
         else:
             print("Yes or No")
-        repeat = str(input("Do you wish to continue?(yes/no) ")).lower()
+        repeat = ("str", "Do you wish to continue?(yes/no) ")#Ends loop
 elif mode == 2:
-    print("""    ============================
+    print("""
+    ============================
     ||       Debug menu       ||
     || version: 2.1           ||
     || libraries: math        ||
-    || comments: 14            ||
+    || comments: 16           ||
     ============================""")#Prints the debug screen
