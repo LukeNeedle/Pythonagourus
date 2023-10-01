@@ -1,9 +1,9 @@
 # Imports libraries
-import math as m
+import math
 
 # Declare Variables
-repeat = "yes"
-restart = "no"
+repeat = True
+restart = False
 
 # Functions
 def round(roundamount,answer):
@@ -12,34 +12,38 @@ def round(roundamount,answer):
     else:
         answer = round(answer, roundamount)
     return answer
+
 def validation(type,question):
     if type == "str":
-        while True:
-            variable = (input(question))
-            if variable.isdigit():
-                continue
-            else:
-                variable = str(variable).lower()
-                return variable
-                break
+        variable = input(question)
+        if variable.isdigit():
+            variable = validation(type, question)
+        
+        return str(variable).lower()
+
     elif type == "int":
-        while True:
-            variable = (input(question))
-            if variable.isdigit():
-                variable = str(variable).lower()
-                return variable
-                break
-            else:
-                continue
+        variable = input(question)
+        if not variable.isdigit():
+            variable = validation(type, question)
+        
+        return int(variable)
+    
+    elif type == "bool":
+        variable = input(question)
+        if variable.isdigit():
+            variable = validation(type, question)
+        
+        if variable == "True" or variable == "true" or variable == True:
+            return True
+        else:
+            return False
+
     elif type == "float":
-        while True:
-            variable = (input(question))
-            if variable.isdigit():
-                variable = str(variable).lower()
-                return variable
-                break
-            else:
-                continue
+        variable = input(question)
+        if not variable.isdigit():
+            variable = validation(type, question)
+        return str(variable).lower()
+
 def Start_Screen():
     print("""===============================
 || 1: The Interior angle     ||
@@ -47,100 +51,92 @@ def Start_Screen():
 || 3: The Hypotenuse         ||
 || 4: The Adjacent side      ||
 ===============================""")
+    
     find = validation("int","What do you want to find? ")
-    knowone = validation("str","Do you know the interior angle?(True or False) ")
-    knowtwo = validation("str","Do you know the opposite side?(True or False) ")
-    knowthree = validation("str","Do you know the Hypotenuse?(True or False) ")
-    knowfour = validation("str","Do you know the adjacent side?(True or False) ")
 
-#Title Screen
+    known = []
+    known[0] = validation("bool","Do you know the interior angle?(True or False) ")
+    known[1] = validation("bool","Do you know the opposite side?(True or False) ")
+    known[2] = validation("bool","Do you know the Hypotenuse?(True or False) ")
+    known[3] = validation("bool","Do you know the adjacent side?(True or False) ")
+
+    return find, known[0], known[1], known[2], known[3]
+
 print("Welcome to Pythonagorus")#title
-print("Press enter to continue")
-input()#makes the user click enter to continue
 
-#Main Code
+while repeat == True:
+    known = []
+    find, known[0], known[1], known[2], known[3] = Start_Screen()
 
-while repeat == "yes":
-    print("""===============================
-|| 1: The Interior angle     ||
-|| 2: The Opposite side      ||
-|| 3: The Hypotenuse         ||
-|| 4: The Adjacent side      ||
-===============================""")
-    find = validation("int","What do you want to find? ")
-    knowone = validation("str","Do you know the interior angle?(True or False) ")
-    knowtwo = validation("str","Do you know the opposite side?(True or False) ")
-    knowthree = validation("str","Do you know the Hypotenuse?(True or False) ")
-    knowfour = validation("str","Do you know the adjacent side?(True or False) ")
-    if find == 1 and knowone == "true":
-        restart = "yes"
-    elif find == 2 and knowtwo == "true":
-        restart = "yes"
-    elif find == 3 and knowthree == "true":
-        restart = "yes"
-    elif find == 4 and knowfour == "true":
-        restart = "yes"
-
-    if restart == "no":
+    if find == 1 and not known[0]:
+        pass
+    elif find == 2 and not known[1]:
+        pass
+    elif find == 3 and not known[2]:
+        pass
+    elif find == 4 and not known[3]:
+        pass
+    else:
         #Tan
-        if knowtwo == "true"  and knowfour == "true" and find == 1:#Don't know interior angle
+        if known[1] == True  and known[3] == True and find == 1:#Don't know interior angle
             opposite = validation("float", "What is the opposite? ")
             adjacent = validation("float", "What is the adjacent? ")
-            answer = m.degrees(m.atan(opposite / adjacent))#InverseTan
-        elif knowone == "true" and knowfour == "true" and find == 2:#Don't know opposite side
+            answer = math.degrees(math.atan(opposite / adjacent))#InverseTan
+        
+        elif known[0] == True and known[3] == True and find == 2:#Don't know opposite side
             interiorAngle = validation("float", "What is the interior angle? ")
             adjacent = validation("float", "What is the adjacent? ")
-            answer = m.degrees(m.tan(interiorAngle) * adjacent)#Tan
-        elif knowone == "true" and knowtwo == "true" and find == 4:#Don't know adjacent side
+            answer = math.degrees(math.tan(interiorAngle) * adjacent)#Tan
+        
+        elif known[0] == True and known[1] == True and find == 4:#Don't know adjacent side
             interiorAngle = validation("float", "What is the interior angle? ")
             opposite = validation("float", "What is the opposite? ")
-            answer = m.degrees(opposite / m.tan(interiorAngle))#Tan
+            answer = math.degrees(opposite / math.tan(interiorAngle))#Tan
         
         #Sine
-        elif knowtwo == "true" and knowthree == "true" and find == 1:#Don't know interior angle
+        elif known[1] == True and known[2] == True and find == 1:#Don't know interior angle
             opposite = validation("float", "What is the opposite? ")
             hypotenuse = validation("float", "What is the hypotenuse? ")
-            answer = m.degrees(m.sinh(opposite / hypotenuse))#InverseSine
-        elif knowone == "true" and knowthree == "true" and find == 2:
+            answer = math.degrees(math.sinh(opposite / hypotenuse))#InverseSine
+        elif known[0] == True and known[2] == True and find == 2:
             interiorAngle = validation("float", "What is the interior angle? ")
             hypotenuse = validation("float", "What is the hypotenuse? ")
-            answer = m.degrees(m.sin(interiorAngle) * hypotenuse)#Sine
-        elif knowone == "true" and knowtwo == "true" and find == 3:
+            answer = math.degrees(math.sin(interiorAngle) * hypotenuse)#Sine
+        elif known[0] == True and known[1] == True and find == 3:
             interiorAngle = validation("float", "What is the interior angle? ")
             opposite = validation("float", "What is the opposite? ")
-            answer = m.degrees(opposite / m.sin(interiorAngle))#Sine
+            answer = math.degrees(opposite / math.sin(interiorAngle))#Sine
         
         #Cosine
-        elif knowfour == "true" and knowthree == "true" and find == 1:
+        elif known[3] == True and known[2] == True and find == 1:
             adjacent = validation("float", "What is the adjacent? ")
             hypotenuse = validation("float", "What is the hypotenuse? ")
-            answer = m.degrees(m.cosh(adjacent / hypotenuse))#InverseCosine
-        elif knowone == "true" and knowfour == "true" and find == 3:
+            answer = math.degrees(math.cosh(adjacent / hypotenuse))#InverseCosine
+        elif known[0] == True and known[3] == True and find == 3:
             interiorAngle = validation("float", "What is the interior angle? ")
             adjacent = validation("float", "What is the adjacent? ")
-            answer = m.degrees(adjacent / m.cos(interiorAngle))#Cosine
-        elif knowone == "true" and knowthree == "true" and find == 4:
+            answer = math.degrees(adjacent / math.cos(interiorAngle))#Cosine
+        elif known[0] == True and known[2] == True and find == 4:
             interiorAngle = validation("float","What is the interior angle? ")
             hypotenuse = validation("float", "What is the hypotenuse? ")
-            answer = m.degrees(hypotenuse * m.cos(interiorAngle))#Cosine
+            answer = math.degrees(hypotenuse * math.cos(interiorAngle))#Cosine
 
-        elif knowone == "true" and knowtwo == "true" and find == 4:
+        #Pythagoras
+        elif known[0] == True and known[1] == True and find == 4:
             otherlength = validation("float","What is the other length? ")
             hypotenuse = validation("float", "What is the hypotenuse? ")
-            answer = m.sqrt((m.pow(hypotenuse, 2) - m.pow(otherlength, 2)))
-        elif knowthree == "true" and knowfour == "true" and find == 2:
+            answer = math.sqrt((math.pow(hypotenuse, 2) - math.pow(otherlength, 2)))
+        elif known[2] == True and known[3] == True and find == 2:
             hypotenuse = validation("float", "What is the hypotenuse? ")
             adjacent = validation("float", "What is the adjacent? ")
-            answer = m.sqrt((m.pow(adjacent, 2) - m.pow(hypotenuse, 2)))
-        elif knowone == "true" and knowtwo == "true" and find == 3:
+            answer = math.sqrt((math.pow(adjacent, 2) - math.pow(hypotenuse, 2)))
+        elif known[0] == True and known[1] == True and find == 3:
             otherlengthone = validation("float", "Please enter one of the other lengths: ")
             otherlengthtwo = validation("float","Please enter the other length: ")
-            answer = m.sqrt((m.pow(otherlengthone, 2) + m.pow(otherlengthtwo, 2)))
+            answer = math.sqrt((math.pow(otherlengthone, 2) + math.pow(otherlengthtwo, 2)))
 
         print("The missing side is", answer)
         roundamount = validation("int", "How many decimal places do you want to round the answer to? ")
         print("The missing side is", round(roundamount,answer))#rounds the answer
+
         repeat = validation("str", "Do you wish to continue?(yes/no) ")#Ends loop
-    else:
-        print("""If you know a side then why do you want to find it?
-""")
