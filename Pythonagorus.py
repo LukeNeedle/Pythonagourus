@@ -2,8 +2,7 @@
 import math
 
 # Declare Variables
-repeat = True
-restart = False
+answer = None
 
 # Functions
 def round_function(roundamount:int, answer:float):
