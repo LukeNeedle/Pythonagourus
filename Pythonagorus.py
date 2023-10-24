@@ -6,6 +6,16 @@ answer = None
 
 # Functions
 def round_function(roundamount:int, answer:float):
+    """
+    Validates the user's roundamount and then rounds the answer if it is valid.
+
+    Args:
+        roundamount (int): The amount to round by.
+        answer (float): The value to round.
+
+    Returns:
+        float: The rounded value if roundamount is valid, otherwise it is the original answer.
+    """
     if roundamount == 0 or roundamount > 20:
         print("You can't round to 0 or over 20")
     else:
@@ -13,6 +23,16 @@ def round_function(roundamount:int, answer:float):
     return answer
 
 def validation(type:str,question:str):
+    """
+    Validates use input.
+
+    Args:
+        type (str): The type the value should be.
+        question (str): The prompt to display to the user.
+
+    Returns:
+        *varies*: The validated response in the correct type that was asked for.
+    """
     if type == "str":
         variable = input(question)
         if variable.isdigit():
@@ -54,6 +74,13 @@ def validation(type:str,question:str):
         return float(variable)
 
 def Start_Screen():
+    """
+    Asks the user what they want to find and what values that they know.
+
+    Returns:
+        int: The integer value that corresponds to the thing that the user wants to find.
+        bool: List of Boolean values.
+    """
     print("=============================")
     print("|| 1: The Interior angle   ||")
     print("|| 2: The Opposite side    ||")
@@ -75,6 +102,9 @@ def Start_Screen():
 print("Welcome to Pythonagorus")
 
 while True:
+    """
+    Calculates the side/angle.
+    """
     toFind, known = Start_Screen()
 
     if toFind == 1 and known[0]:
