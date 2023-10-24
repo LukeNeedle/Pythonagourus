@@ -46,28 +46,27 @@ def validation(type,question):
         return str(variable).lower()
 
 def Start_Screen():
-    print("""===============================
-|| 1: The Interior angle     ||
-|| 2: The Opposite side      ||
-|| 3: The Hypotenuse         ||
-|| 4: The Adjacent side      ||
-===============================""")
+    print("===============================")
+    print("|| 1: The Interior angle     ||")
+    print("|| 2: The Opposite side      ||")
+    print("|| 3: The Hypotenuse         ||")
+    print("|| 4: The Adjacent side      ||")
+    print("===============================")
     
-    find = validation("int","What do you want to find? ")
+    toFind = validation("int","What do you want to find? ")
 
-    known = []
+    known = [None, None, None, None]
     known[0] = validation("bool","Do you know the interior angle?(True or False) ")
     known[1] = validation("bool","Do you know the opposite side?(True or False) ")
     known[2] = validation("bool","Do you know the Hypotenuse?(True or False) ")
     known[3] = validation("bool","Do you know the adjacent side?(True or False) ")
 
-    return find, known[0], known[1], known[2], known[3]
+    return toFind, known
 
 print("Welcome to Pythonagorus")#title
 
-while repeat == True:
-    known = []
-    find, known[0], known[1], known[2], known[3] = Start_Screen()
+while True:
+    toFind, known = Start_Screen()
 
     if toFind == 1 and known[0]:
         pass
