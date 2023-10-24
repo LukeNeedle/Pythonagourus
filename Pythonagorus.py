@@ -8,7 +8,6 @@ answer = None
 def round_function(roundamount:int, answer:float):
     if roundamount == 0 or roundamount > 20:
         print("You can't round to 0 or over 20")
-        answer = round_function(roundamount, answer)
     else:
         answer = round(answer, roundamount)
     return answer
