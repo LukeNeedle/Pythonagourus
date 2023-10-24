@@ -72,7 +72,8 @@ def Start_Screen():
 
     return toFind, known
 
-print("Welcome to Pythonagorus")#title
+# Main Program
+print("Welcome to Pythonagorus")
 
 while True:
     toFind, known = Start_Screen()
