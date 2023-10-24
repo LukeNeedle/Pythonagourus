@@ -69,72 +69,57 @@ while repeat == True:
     known = []
     find, known[0], known[1], known[2], known[3] = Start_Screen()
 
-    if find == 1 and not known[0]:
+    if toFind == 1 and known[0]:
         pass
-    elif find == 2 and not known[1]:
+    elif toFind == 2 and known[1]:
         pass
-    elif find == 3 and not known[2]:
+    elif toFind == 3 and known[2]:
         pass
-    elif find == 4 and not known[3]:
+    elif toFind == 4 and known[3]:
         pass
     else:
+        if known[0]:
+            interiorAngle = validation("float", "What is the interior angle? ")
+        if known[1]:
+            opposite = validation("float", "What is the opposite? ")
+        if known[2]:
+            hypotenuse = validation("float", "What is the hypotenuse? ")
+        if known[3]:
+            adjacent = validation("float", "What is the adjacent? ")
+        
         #Tan
-        if known[1] == True  and known[3] == True and find == 1:#Don't know interior angle
-            opposite = validation("float", "What is the opposite? ")
-            adjacent = validation("float", "What is the adjacent? ")
-            answer = math.degrees(math.atan(opposite / adjacent))#InverseTan
+        if known[1] and known[3] and toFind == 1: # Find Interior Angle
+            answer = math.degrees(math.atan(opposite / adjacent))
         
-        elif known[0] == True and known[3] == True and find == 2:#Don't know opposite side
-            interiorAngle = validation("float", "What is the interior angle? ")
-            adjacent = validation("float", "What is the adjacent? ")
-            answer = math.degrees(math.tan(interiorAngle) * adjacent)#Tan
+        elif known[0] and known[3] and toFind == 2: # Find Opposite Side
+            answer = math.degrees(math.tan(interiorAngle) * adjacent)
         
-        elif known[0] == True and known[1] == True and find == 4:#Don't know adjacent side
-            interiorAngle = validation("float", "What is the interior angle? ")
-            opposite = validation("float", "What is the opposite? ")
-            answer = math.degrees(opposite / math.tan(interiorAngle))#Tan
+        elif known[0] and known[1] and toFind == 4: # Find Adjacent Side
+            answer = math.degrees(opposite / math.tan(interiorAngle))
         
         #Sine
-        elif known[1] == True and known[2] == True and find == 1:#Don't know interior angle
-            opposite = validation("float", "What is the opposite? ")
-            hypotenuse = validation("float", "What is the hypotenuse? ")
-            answer = math.degrees(math.sinh(opposite / hypotenuse))#InverseSine
-        elif known[0] == True and known[2] == True and find == 2:
-            interiorAngle = validation("float", "What is the interior angle? ")
-            hypotenuse = validation("float", "What is the hypotenuse? ")
-            answer = math.degrees(math.sin(interiorAngle) * hypotenuse)#Sine
-        elif known[0] == True and known[1] == True and find == 3:
-            interiorAngle = validation("float", "What is the interior angle? ")
-            opposite = validation("float", "What is the opposite? ")
-            answer = math.degrees(opposite / math.sin(interiorAngle))#Sine
+        elif known[1] and known[2] and toFind == 1: # Find Interior Angle
+            answer = math.degrees(math.sinh(opposite / hypotenuse))
+        elif known[0] and known[2] and toFind == 2: # Find Opposite Side
+            answer = math.degrees(math.sin(interiorAngle) * hypotenuse)
+        elif known[0] and known[1] and toFind == 3: # Find Hypotenuse
+            answer = math.degrees(opposite / math.sin(interiorAngle))
         
         #Cosine
-        elif known[3] == True and known[2] == True and find == 1:
-            adjacent = validation("float", "What is the adjacent? ")
-            hypotenuse = validation("float", "What is the hypotenuse? ")
-            answer = math.degrees(math.cosh(adjacent / hypotenuse))#InverseCosine
-        elif known[0] == True and known[3] == True and find == 3:
-            interiorAngle = validation("float", "What is the interior angle? ")
-            adjacent = validation("float", "What is the adjacent? ")
-            answer = math.degrees(adjacent / math.cos(interiorAngle))#Cosine
-        elif known[0] == True and known[2] == True and find == 4:
-            interiorAngle = validation("float","What is the interior angle? ")
-            hypotenuse = validation("float", "What is the hypotenuse? ")
-            answer = math.degrees(hypotenuse * math.cos(interiorAngle))#Cosine
+        elif known[3] and known[2] and toFind == 1: # Find Interior angle
+            answer = math.degrees(math.cosh(adjacent / hypotenuse))
+        elif known[0] and known[3] and toFind == 3: # Find Hypotenuse
+            answer = math.degrees(adjacent / math.cos(interiorAngle))
+        elif known[0] and known[2] and toFind == 4: # Find Adjacent Side
+            answer = math.degrees(hypotenuse * math.cos(interiorAngle))
 
         #Pythagoras
-        elif known[0] == True and known[1] == True and find == 4:
-            otherlength = validation("float","What is the other length? ")
-            hypotenuse = validation("float", "What is the hypotenuse? ")
-            answer = math.sqrt((math.pow(hypotenuse, 2) - math.pow(otherlength, 2)))
-        elif known[2] == True and known[3] == True and find == 2:
-            hypotenuse = validation("float", "What is the hypotenuse? ")
-            adjacent = validation("float", "What is the adjacent? ")
+        elif known[2] and known[1] and toFind == 4: # Find Adjacent Side
+            answer = math.sqrt((math.pow(hypotenuse, 2) - math.pow(opposite, 2)))
+        elif known[2] and known[3] and toFind == 2: # Find Opposite Side
             answer = math.sqrt((math.pow(adjacent, 2) - math.pow(hypotenuse, 2)))
-        elif known[0] == True and known[1] == True and find == 3:
-            otherlengthone = validation("float", "Please enter one of the other lengths: ")
-            otherlengthtwo = validation("float","Please enter the other length: ")
-            answer = math.sqrt((math.pow(otherlengthone, 2) + math.pow(otherlengthtwo, 2)))
+        elif known[1] and known[3] and toFind == 3: # Find Hypotenuse
+            answer = math.sqrt((math.pow(adjacent, 2) + math.pow(opposite, 2)))
 
         if answer != None:
             if known[0]:
