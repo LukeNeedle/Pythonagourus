@@ -6,9 +6,10 @@ repeat = True
 restart = False
 
 # Functions
-def round(roundamount,answer):
+def round_function(roundamount:int, answer:float):
     if roundamount == 0 or roundamount > 20:
         print("You can't round to 0 or over 20")
+        answer = round_function(roundamount, answer)
     else:
         answer = round(answer, roundamount)
     return answer
@@ -135,8 +136,14 @@ while repeat == True:
             otherlengthtwo = validation("float","Please enter the other length: ")
             answer = math.sqrt((math.pow(otherlengthone, 2) + math.pow(otherlengthtwo, 2)))
 
-        print("The missing side is", answer)
-        roundamount = validation("int", "How many decimal places do you want to round the answer to? ")
-        print("The missing side is", round(roundamount,answer))#rounds the answer
+        if answer != None:
+            if known[0]:
+                answerType = "side"
+            else:
+                answerType = "angle"
+            print(f"The missing {answerType} is: {answer}")
+            roundamount = validation("int", "How many decimal places do you want to round the answer to? ")
+            print(f"The missing {answerType} is: {round_function(roundamount, answer)}")
 
-        repeat = validation("str", "Do you wish to continue?(yes/no) ")#Ends loop
+        if not validation("bool", "Do you wish to continue?(True/False) "):
+            break
