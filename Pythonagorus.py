@@ -14,11 +14,14 @@ def round_function(roundamount:int, answer:float):
         answer = round(answer, roundamount)
     return answer
 
-def validation(type,question):
+def validation(type:str,question:str):
     if type == "str":
         variable = input(question)
         if variable.isdigit():
             variable = validation(type, question)
+        elif variable == "" or variable == " ":
+            variable = validation(type, question)
+            
         
         return str(variable).lower()
 
@@ -26,12 +29,16 @@ def validation(type,question):
         variable = input(question)
         if not variable.isdigit():
             variable = validation(type, question)
-        
+        elif variable == "" or variable == " ":
+            variable = validation(type, question)
+            
         return int(variable)
     
     elif type == "bool":
         variable = input(question)
         if variable.isdigit():
+            variable = validation(type, question)
+        elif variable == "" or variable == " ":
             variable = validation(type, question)
         
         if variable == "True" or variable == "true" or variable == True:
@@ -43,7 +50,10 @@ def validation(type,question):
         variable = input(question)
         if not variable.isdigit():
             variable = validation(type, question)
-        return str(variable).lower()
+        elif variable == "" or variable == " ":
+            variable = validation(type, question)
+            
+        return float(variable)
 
 def Start_Screen():
     print("===============================")
