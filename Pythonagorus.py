@@ -168,5 +168,5 @@ while True:
             roundamount = validation("int", "How many decimal places do you want to round the answer to? ")
             print(f"The missing {answerType} is: {round_function(roundamount, answer)}")
 
-        if not validation("bool", "Do you wish to continue?(True/False) "):
-            break
+    if not validation("bool", "Do you wish to continue?(True/False) "):
+        break
