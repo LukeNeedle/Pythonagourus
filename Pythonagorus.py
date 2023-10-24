@@ -54,12 +54,12 @@ def validation(type:str,question:str):
         return float(variable)
 
 def Start_Screen():
-    print("===============================")
-    print("|| 1: The Interior angle     ||")
-    print("|| 2: The Opposite side      ||")
-    print("|| 3: The Hypotenuse         ||")
-    print("|| 4: The Adjacent side      ||")
-    print("===============================")
+    print("=============================")
+    print("|| 1: The Interior angle   ||")
+    print("|| 2: The Opposite side    ||")
+    print("|| 3: The Hypotenuse       ||")
+    print("|| 4: The Adjacent side    ||")
+    print("=============================")
     
     toFind = validation("int","What do you want to find? ")
 
